@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
 """
-Created on Sun Dec  4 20:58:46 2022
-
-@author: abelw
+AoC Day 4
 """
 
 def sol_a(filepath):
