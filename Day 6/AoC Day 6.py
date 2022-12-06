@@ -14,8 +14,11 @@ def sol_a(filepath):
     
     #Iterates through characters in data
     for character in data:
+        #Adds character to cache and removes first one
         cache.append(character)
         cache.pop(0)
+        
+        #Increments index
         index+=1
         
         #If conditions are satisfied, return index
@@ -39,8 +42,11 @@ def sol_b(filepath):
     
     #Iterates through characters in data
     for character in data:
+        #Adds character to cache and removes first one
         cache.append(character)
         cache.pop(0)
+        
+        #Increments index
         index+=1
 
         #If conditions are satisfied, return index
