@@ -67,5 +67,3 @@ def sol_a(filepath):
         
         
         
-
-test = sol_a("input.txt")
