@@ -8,7 +8,7 @@ monkeys = list()
 
 import time
 
-class Monkey():
+class Monkey_Old():
     def __init__(self, operator, change, test, true_target, false_target, inspections = int(0), objects = list()):
         self.objects = objects
         self.operator = operator
@@ -39,11 +39,78 @@ class Monkey():
                 
             worry = math.floor(worry / 3)
             
+            
             if (worry % self.test) == 0:
                 monkeys[self.true_target].recieve(worry)
-                print(str(worry) +" passed to "+str(self.true_target))
+                #print(str(worry) +" passed to "+str(self.true_target))
             else:
                 monkeys[self.false_target].recieve(worry)
+                #print(str(worry) +" passed to "+str(self.false_target))
+
+        self.inspections += 1
+        self.objects.pop(0)
+                
+    def recieve(self,item):
+        self.objects.append(item)
+        
+    def output(self):
+        print(self.objects)
+        
+
+class Monkey():
+    def __init__(self, operator, change, test, true_target, false_target, inspections = int(0), objects = list()):
+        self.objects = objects
+        self.operator = operator
+        self.change = change
+        self.test = test
+        self.true_target = true_target
+        self.false_target = false_target
+        self.inspections = inspections
+    
+
+        
+    def action(self):
+        
+        def get_divisors(integer):
+            output = list()
+            for i in range(1,integer+1):
+                if (integer % i) == 0:
+                    output.append(i)
+            
+            return output
+        
+        def lcm(lst):
+            lcm_temp = max(lst)
+            while True:
+                if all(lcm_temp % x == 0 for x in lst):
+                    break
+                lcm_temp = lcm_temp + 1
+            return lcm_temp
+        
+        if self.objects == []:
+            pass
+        
+        else:
+            worry = self.objects[0]
+            change = self.change
+            
+            if self.change == "old":
+                change = int(worry)
+            
+            if self.operator == "+":
+                worry += change
+            elif self.operator == "-":
+                worry -= change
+            elif self.operator == "*":
+                worry *= change
+                
+                
+                            
+            if (worry % self.test) == 0:
+                monkeys[self.true_target].recieve(worry%lcm(get_divisors(worry)+[self.test]))
+                print(str(worry) +" passed to "+str(self.true_target))
+            else:
+                monkeys[self.false_target].recieve(worry%lcm(get_divisors(worry)+[self.test]))
                 print(str(worry) +" passed to "+str(self.false_target))
 
         self.inspections += 1
@@ -56,7 +123,7 @@ class Monkey():
         print(self.objects)
         
 
-def sol_a_test():
+def sol_b_test():
     monkeys.append(Monkey(objects = [79,98], 
                           operator = "*",
                           change = 19,
@@ -85,6 +152,9 @@ def sol_a_test():
                           true_target = 0,
                           false_target = 1))
 
+
+
+                
     
     def take_round():
         for monkey in monkeys:
@@ -107,6 +177,8 @@ def sol_a_test():
         total_inspections.append(monkey.inspections)
     
     print(total_inspections)
+    
+sol_b_test()
 
 monkeys = list()
 
@@ -190,4 +262,4 @@ def sol_a_actual():
     
     print(total_inspections)
 
-sol_a_actual()
+
